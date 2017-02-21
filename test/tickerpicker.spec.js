@@ -1,24 +1,18 @@
-var chai = require('chai');
-var ticker = require('../dist/tickerpicker');
-var _ = require('lodash');
+import tape from 'tape'
+import * as ticker from '../src/tickerpicker'
 
-var should = chai.should();
+ticker.setStockData([
+  {"name":"ABC Products Company","symbol":"ABC"},
+  {"name":"BCD Inc","symbol":"BCD"},
+  {"name":"XYZ Products LLC","symbol":"XYZ"}
+])
 
-describe('tickerpicker', function() {
-  
-  ticker.setStockData([
-    {"name":"ABC Products Company","symbol":"ABC"},
-    {"name":"BCD Inc","symbol":"BCD"},
-    {"name":"XYZ Products LLC","symbol":"XYZ"}
-  ]);
-      
-  it('should suggest symbols based on partial company names', function() {
-    _.map(ticker.symbol("prod"), 'symbol').should.eql([ "ABC", "XYZ" ]);
-  });
-  
-  it('should suggest company names based on partial stock symbols', function() {
-    _.map(ticker.suggest("Bc"), 'name').should.eql([ "ABC Products Company", "BCD Inc" ]);
-  });
-});
+tape('::suggestSymbols suggests symbols based on partial comany names', t => {
+  t.same(ticker.suggestSymbols("prod").map(c => c.symbol), [ "ABC", "XYZ" ])
+  t.end()
+})
 
-
+tape('::suggestCompanyNames suggests company names based on partial tickers', t => {
+  t.same(ticker.suggestCompanyNames("BC").map(c => c.name), [ "ABC Products Company", "BCD Inc" ])
+  t.end()
+})

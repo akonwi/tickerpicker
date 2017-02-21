@@ -5,8 +5,7 @@
   "main": "dist/tickerpicker.js",
   "scripts": {
     "generate": "node csv/generate.js",
-    "build": "webpack",
-    "test": "mocha -R spec -u bdd test/tickerpicker.spec.js"
+    "test": "babel-tape-runner test/tickerpicker.spec.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +22,11 @@
   ],
   "author": "andytompkins <andy.tompkins@gmail.com> (github.com/andytompkins)",
   "devDependencies": {
-    "babel-core": "^6.1.4",
-    "babel-loader": "^6.1.0",
-    "babel-preset-es2015": "^6.1.4",
-    "chai": "^3.4.1",
-    "csv": "^0.4.6",
-    "mocha": "^2.3.4",
-    "webpack": "^1.12.4"
+    "csv": "^0.4.6"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "babel-preset-es2015": "^6.22.0",
+    "babel-tape-runner": "^2.0.1",
+    "tape": "^4.6.3"
   }
 }
