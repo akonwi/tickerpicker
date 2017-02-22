@@ -16,6 +16,7 @@ export function suggestSymbols(companyPartial) {
   return lookup(companyPartial, 'name')
 }
 
-export function suggestCompanyNames(symbolPartial) {
-  return lookup(symbolPartial, 'symbol')
+export function getNameForSymbol(symbol) {
+  const found = stockData.find(company => company.symbol.toLowerCase() === symbol.trim().toLowerCase())
+  return found ? found.name : undefined
 }
