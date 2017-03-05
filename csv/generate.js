@@ -11,7 +11,7 @@ const parsePromise = Promise.all(sources.map(source => {
     csv().fromString(fs.readFileSync(`${__dirname}/${source}`, {encoding: 'utf8'}))
     .on('json', object => {
       if (/\^/.test(object.Symbol) === false) {
-        stocks.push({name: object.Name, symbol: object.Symbol})
+        stocks.push({name: object.Name.trim(), symbol: object.Symbol.trim()})
       }
     })
     .on('done', error => {
